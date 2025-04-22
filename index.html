@@ -3,41 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibrant Task Manager</title>
-    <!-- Google Fonts -->
+    <title>TaskMaster Pro</title> {/* Updated Title */}
+    {/* Google Fonts */}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"> {/* Changed secondary font to Inter */}
+    {/* Font Awesome */}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <!-- Stylesheet -->
+    {/* Stylesheet */}
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="app-background"> {/* Optional: Add class for styling */}
+<body class="app-background">
 
-    <div class="container">
+    <main class="container">
         <header class="app-header">
-            <h1>TaskMaster</h1> {/* Changed title slightly */}
+            <h1>TaskMaster <i class="fa-solid fa-check-double"></i></h1> {/* Added icon to title */}
         </header>
 
-        <div class="input-area">
-            <i class="input-icon fa-regular fa-pen-to-square"></i> {/* Added icon inside input area */}
-            <input type="text" id="taskInput" placeholder="What needs doing?">
-            <button id="addTaskBtn" title="Add Task"><i class="fa-solid fa-paper-plane"></i> Add</button> {/* Changed icon */}
-        </div>
-
-        <div class="task-area">
-            <div class="controls">
-                <span id="taskCount">Tasks: 0</span> {/* Added Task Count */}
-                 <button id="clearCompletedBtn" class="clear-btn">Clear Done</button>
+        <section class="app-content">
+            <div class="input-area">
+                <i class="input-icon fa-regular fa-pen-to-square"></i>
+                <input type="text" id="taskInput" placeholder="What's the next task?">
+                <button id="addTaskBtn" title="Add Task"><i class="fa-solid fa-plus"></i> Add Task</button> {/* Changed icon & text */}
             </div>
 
-            <ul id="taskList">
-                {/* Tasks dynamically generated here */}
-                {/* Empty state message will be handled by CSS */}
-            </ul>
-        </div>
-    </div>
+            <div class="task-area">
+                <div class="controls">
+                    <span id="taskCount" class="task-count-badge">Tasks: 0</span>
+                     <button id="clearCompletedBtn" class="clear-btn"><i class="fa-solid fa-broom"></i> Clear Done</button> {/* Added icon */}
+                </div>
+
+                <ul id="taskList">
+                    {/* Tasks dynamically generated here */}
+                </ul>
+            </div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
