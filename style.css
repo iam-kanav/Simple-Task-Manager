@@ -3,26 +3,38 @@
     --font-primary: 'Poppins', sans-serif;
     --font-secondary: 'Nunito Sans', sans-serif;
 
-    --color-bg: #f4f7f6;
-    --color-surface: #ffffff;
-    --color-primary: #3498db; /* A nice blue */
-    --color-primary-dark: #2980b9;
-    --color-secondary: #1abc9c; /* Teal for Add */
-    --color-secondary-dark: #16a085;
-    --color-accent: #f39c12; /* Orange for Clear */
-    --color-accent-dark: #e67e22;
-    --color-danger: #e74c3c; /* Red for Delete */
-    --color-danger-dark: #c0392b;
-    --color-text: #34495e;
-    --color-text-light: #7f8c8d;
-    --color-text-completed: #bdc3c7;
-    --color-border: #ecf0f1;
-    --color-icon: #95a5a6;
+    /* Vibrant Palette */
+    --color-primary-light: #7f7fd5;
+    --color-primary-dark: #86a8e7;
+    --color-secondary: #91eae4;
+    --color-gradient-start: var(--color-primary-light);
+    --color-gradient-end: var(--color-primary-dark);
+    --color-gradient-secondary-start: #ff9a9e;
+    --color-gradient-secondary-end: #fad0c4;
 
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
-    --border-radius: 8px;
-    --transition-speed: 0.2s;
+
+    --color-surface: rgba(255, 255, 255, 0.95); /* Slightly transparent surface */
+    --color-surface-alt: rgba(255, 255, 255, 0.7);
+    --color-text: #2c3e50; /* Dark Slate Blue */
+    --color-text-light: #7f8c8d;
+    --color-text-placeholder: #a0aec0; /* Lighter placeholder */
+    --color-text-on-primary: #ffffff;
+    --color-completed: #a5b1c2; /* Grey for completed */
+    --color-border: rgba(0, 0, 0, 0.08);
+    --color-shadow: rgba(44, 62, 80, 0.15);
+    --color-icon: #8a97a8;
+
+    --color-danger: #e74c3c;
+    --color-danger-dark: #c0392b;
+    --color-warning: #f39c12;
+    --color-warning-dark: #d35400;
+
+
+    --shadow-md: 0 6px 15px var(--color-shadow);
+    --shadow-lg: 0 10px 30px rgba(44, 62, 80, 0.2);
+    --border-radius-lg: 15px;
+    --border-radius-md: 10px;
+    --transition-speed: 0.25s;
 }
 
 * {
@@ -32,113 +44,166 @@
 }
 
 html {
-    font-size: 100%; /* 16px base */
+    font-size: 100%;
 }
 
-body {
+body.app-background {
     font-family: var(--font-secondary);
-    background-color: var(--color-bg);
+    background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end), var(--color-secondary));
+    background-size: 200% 200%; /* For potential animation */
+    animation: backgroundShift 15s ease infinite; /* Subtle background movement */
     color: var(--color-text);
     line-height: 1.6;
-    padding: 2rem 1rem; /* More padding on body */
+    padding: 2rem 1rem;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
 }
 
+/* Background Animation */
+@keyframes backgroundShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
 .container {
     background-color: var(--color-surface);
-    padding: 2.5rem; /* Generous padding */
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem 2.5rem 2.5rem; /* Adjusted padding */
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 650px; /* Slightly wider */
-    margin-top: 2rem;
+    max-width: 700px; /* Wider */
+    margin-top: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for glass effect */
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 2.5rem; /* More space after header */
 }
 
 h1 {
     font-family: var(--font-primary);
-    font-weight: 700; /* Bolder */
-    text-align: center;
-    color: var(--color-text);
-    margin-bottom: 2rem;
-    font-size: 2.25rem; /* Larger heading */
+    font-weight: 800; /* Extra Bold */
+    color: transparent; /* Make text transparent */
+    background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary-dark));
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-size: 2.8rem; /* Larger */
+    letter-spacing: -1px; /* Slightly tighter */
 }
 
 /* --- Input Area --- */
 .input-area {
     display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background-color: var(--color-surface-alt);
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    position: relative; /* For icon positioning */
+}
+
+.input-icon {
+    color: var(--color-icon);
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
 }
 
 #taskInput {
     flex-grow: 1;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    font-size: 1rem;
+    padding: 0.75rem 0.5rem; /* Adjusted padding */
+    border: none; /* Remove default border */
+    background-color: transparent; /* Inherit background */
+    font-size: 1.05rem;
     font-family: var(--font-secondary);
-    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    background-color: #fdfdfd; /* Slightly off-white input */
+    color: var(--color-text);
+    font-weight: 600;
 }
 #taskInput::placeholder {
-    color: var(--color-text-light);
-    opacity: 0.8;
+    color: var(--color-text-placeholder);
+    font-weight: 400;
+    opacity: 1;
 }
 #taskInput:focus {
     outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* Focus ring */
 }
 
 /* --- Buttons --- */
 button {
     cursor: pointer;
     border: none;
-    border-radius: var(--border-radius);
-    padding: 0.75rem 1.2rem;
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1.3rem;
     font-family: var(--font-primary);
-    font-weight: 500;
+    font-weight: 700; /* Bolder buttons */
     font-size: 0.95rem;
-    transition: background-color var(--transition-speed) ease, transform 0.1s ease;
-    display: inline-flex; /* Align icon and text */
+    transition: all var(--transition-speed) ease;
+    display: inline-flex;
     align-items: center;
-    gap: 0.5rem; /* Space between icon and text */
+    justify-content: center; /* Center content */
+    gap: 0.6rem;
     white-space: nowrap;
+    text-transform: uppercase; /* Uppercase buttons */
+    letter-spacing: 0.5px;
 }
 button:active {
-    transform: translateY(1px); /* Subtle press effect */
+    transform: scale(0.97); /* More noticeable press effect */
 }
 
 #addTaskBtn {
-    background-color: var(--color-secondary);
-    color: white;
+    background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary-dark));
+    color: var(--color-text-on-primary);
+    box-shadow: 0 4px 10px rgba(127, 127, 213, 0.4); /* Colored shadow */
 }
 #addTaskBtn:hover {
-    background-color: var(--color-secondary-dark);
+    box-shadow: 0 6px 15px rgba(127, 127, 213, 0.6);
+    filter: brightness(1.1); /* Brighter on hover */
 }
 #addTaskBtn i {
-    font-size: 1em; /* Match button font size */
+    font-size: 1em;
+}
+
+/* --- Task Area --- */
+.task-area {
+    margin-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
 }
 
 .controls {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between; /* Space out count and button */
+    align-items: center;
     margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--color-border); /* Separator */
+    padding: 0 0.5rem; /* Align with list padding */
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+#taskCount {
+    font-family: var(--font-primary);
 }
 
 .clear-btn {
-    background-color: var(--color-accent);
-    color: white;
-    padding: 0.5rem 1rem; /* Slightly smaller */
-    font-size: 0.85rem;
+    background: linear-gradient(90deg, var(--color-gradient-secondary-start), var(--color-gradient-secondary-end));
+    color: var(--color-text-on-primary);
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(255, 154, 158, 0.4);
 }
 .clear-btn:hover {
-    background-color: var(--color-accent-dark);
+    box-shadow: 0 5px 12px rgba(255, 154, 158, 0.6);
+    filter: brightness(1.1);
 }
 
 /* --- Task List --- */
@@ -146,28 +211,60 @@ button:active {
     list-style: none;
     padding: 0;
     margin: 0;
+    min-height: 100px; /* Give space for empty message */
+    position: relative; /* For empty message positioning */
 }
 
+/* Empty State Message */
+#taskList:empty::before {
+    content: "No tasks yet! Add one above.";
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-text-light);
+    font-style: italic;
+    font-size: 1rem;
+}
+
+
 #taskList li {
-    background-color: var(--color-surface);
-    padding: 0.8rem 1.2rem;
-    margin-bottom: 0.75rem;
-    border-radius: var(--border-radius);
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly more transparent items */
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius-md);
     border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    transition: all var(--transition-speed) ease;
     word-break: break-word;
+    position: relative;
+    overflow: hidden; /* For pseudo-elements */
 }
-#taskList li:last-child {
-    margin-bottom: 0;
+
+/* Subtle animated border effect on hover */
+#taskList li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%; /* Start off-screen */
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary-dark));
+    transition: left var(--transition-speed) ease-out;
 }
+
 #taskList li:hover {
-    background-color: #f9fafb; /* Very subtle hover */
-    border-color: #e1e5e8;
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.08);
+    border-color: rgba(134, 168, 231, 0.5); /* primary dark translucent */
 }
+#taskList li:hover::after {
+     left: 0; /* Slide in on hover */
+}
+
 
 /* Task Text & Editing */
 #taskList li .task-text {
@@ -177,125 +274,131 @@ button:active {
     position: relative;
     transition: color var(--transition-speed) ease;
     font-size: 1rem;
-    font-weight: 400; /* Regular weight for tasks */
+    font-weight: 600; /* Semi-bold tasks */
+    color: var(--color-text);
 }
 
 #taskList li .edit-input {
     flex-grow: 1;
     margin-right: 1rem;
     padding: 0.4rem 0.6rem;
-    border: 1px solid var(--color-primary);
-    border-radius: calc(var(--border-radius) / 2); /* Smaller radius */
+    border: 1px solid var(--color-primary-dark);
+    border-radius: calc(var(--border-radius-md) / 1.5);
     font-size: 1rem;
     font-family: inherit;
-    background-color: #fdfdfd;
+    font-weight: 600;
+    background-color: #fff;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
 }
 #taskList li .edit-input:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05), 0 0 0 2px rgba(134, 168, 231, 0.3);
 }
 
 /* Completed Task Style */
 #taskList li.completed {
-    background-color: #f8f9fa; /* Slightly different background */
-    border-color: #e9ecef;
+    background-color: rgba(245, 247, 250, 0.8); /* Faded background */
+    opacity: 0.7; /* Fade out completed */
 }
 #taskList li.completed .task-text {
-    color: var(--color-text-completed);
+    color: var(--color-completed);
     text-decoration: line-through;
-    font-weight: 400; /* Keep weight consistent */
+    text-decoration-thickness: 2px;
+    font-weight: 400; /* Lighter weight when completed */
 }
-#taskList li.completed .task-text::before {
-    content: '\f00c'; /* Font Awesome check */
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    color: var(--color-secondary); /* Use Add button color for consistency */
-    margin-right: 0.75rem;
-    font-size: 0.9em;
-}
+/* No checkmark needed if opacity handles it well */
+
 
 /* Task Buttons */
 #taskList li .task-buttons {
     display: flex;
-    gap: 0.5rem; /* Slightly tighter gap */
+    gap: 0.5rem;
     flex-shrink: 0;
+    opacity: 0; /* Hide buttons initially */
+    transition: opacity var(--transition-speed) ease;
+}
+#taskList li:hover .task-buttons {
+    opacity: 1; /* Show buttons on list item hover */
 }
 
 #taskList li button {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.3rem; /* Padding around icon */
-    font-size: 1rem; /* Icon size */
+    padding: 0.3rem;
+    font-size: 1rem;
     color: var(--color-icon);
-    transition: color var(--transition-speed) ease;
-    border-radius: 50%; /* Circular hover effect area */
-    width: 32px; /* Fixed width for alignment */
-    height: 32px; /* Fixed height for alignment */
+    transition: all var(--transition-speed) ease;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #taskList li button:hover {
-    background-color: rgba(0,0,0, 0.05); /* Subtle background on hover */
+    background-color: rgba(0,0,0, 0.08); /* Darker hover background */
+    transform: scale(1.1); /* Pop effect */
 }
 
 #taskList li .edit-btn:hover {
-    color: var(--color-primary); /* Blue */
+    color: var(--color-primary-dark); /* Blue */
 }
 #taskList li .delete-btn:hover {
     color: var(--color-danger); /* Red */
 }
 
 /* Editing State Visibility */
-.editing .task-text,
-.editing .task-buttons {
+.editing .task-text {
     display: none;
+}
+.editing .task-buttons {
+    opacity: 0; /* Hide buttons while editing */
+    pointer-events: none; /* Prevent interaction */
 }
 .editing .edit-input {
     display: inline-block;
 }
 
 /* --- Media Query for Smaller Screens --- */
-@media (max-width: 600px) {
-    body {
-        padding: 1rem 0.5rem; /* Less padding */
+@media (max-width: 650px) {
+    body.app-background {
+        padding: 1rem 0.5rem;
+        align-items: flex-start; /* Align top on mobile */
     }
     .container {
-        padding: 1.5rem 1rem; /* Less padding */
+        padding: 1.5rem 1.2rem 2rem;
         margin-top: 1rem;
+        max-width: 95%; /* Allow more width */
+        backdrop-filter: blur(5px); /* Less blur on mobile */
+        -webkit-backdrop-filter: blur(5px);
     }
     h1 {
-        font-size: 1.8rem; /* Smaller H1 */
-        margin-bottom: 1.5rem;
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
     }
     .input-area {
-        flex-direction: column; /* Stack input and button */
-        gap: 0.5rem;
+        padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+        gap: 0.3rem;
+    }
+    .input-icon {
+        font-size: 1rem;
+        margin-right: 0.3rem;
+    }
+    #taskInput {
+        font-size: 1rem;
+        padding: 0.6rem 0.3rem;
     }
     #addTaskBtn {
-        width: 100%; /* Full width button */
-        justify-content: center; /* Center icon/text */
-    }
-    #taskList li {
-        padding: 0.7rem 0.9rem;
-    }
-    #taskList li .task-text {
-        font-size: 0.95rem;
-    }
-    #taskList li .edit-input {
-        font-size: 0.95rem;
-    }
-    #taskList li button {
-        width: 28px; /* Slightly smaller touch target */
-        height: 28px;
+        padding: 0.7rem 1rem;
         font-size: 0.9rem;
     }
-     #taskList li.completed .task-text::before {
-         margin-right: 0.5rem;
-     }
-    .controls {
-        padding-bottom: 0.75rem;
-        margin-bottom: 1rem;
-    }
+    .task-area { margin-top: 1.5rem; padding-top: 1rem; }
+    .controls { margin-bottom: 1rem; padding: 0; }
+    #taskList li { padding: 0.8rem 1rem; }
+    #taskList li .task-text { font-size: 0.95rem; }
+    #taskList li .edit-input { font-size: 0.95rem; }
+    #taskList li .task-buttons { opacity: 1; /* Always show buttons on mobile */ }
+    #taskList li button { width: 30px; height: 30px; font-size: 0.9rem; }
+    #taskList:empty::before { top: 20px; font-size: 0.9rem; }
 }
