@@ -1,39 +1,41 @@
 /* --- Global Styles & Variables --- */
 :root {
     --font-primary: 'Poppins', sans-serif;
-    --font-secondary: 'Nunito Sans', sans-serif;
+    --font-secondary: 'Inter', sans-serif; /* Changed to Inter */
 
-    /* Vibrant Palette */
-    --color-primary-light: #7f7fd5;
-    --color-primary-dark: #86a8e7;
-    --color-secondary: #91eae4;
-    --color-gradient-start: var(--color-primary-light);
-    --color-gradient-end: var(--color-primary-dark);
-    --color-gradient-secondary-start: #ff9a9e;
-    --color-gradient-secondary-end: #fad0c4;
+    /* Refreshed Palette */
+    --color-bg-start: #e0eafc; /* Light blue/purple */
+    --color-bg-end: #cfdef3;   /* Lighter blue */
+    --color-surface: #f0f3f9; /* Off-white surface */
+    --color-surface-inset: #e6eaf1; /* Slightly darker for inset effects */
 
+    --color-primary: #6a82fb; /* Vibrant blue/purple */
+    --color-primary-dark: #5468d4;
+    --color-primary-light-transparent: rgba(106, 130, 251, 0.1);
 
-    --color-surface: rgba(255, 255, 255, 0.95); /* Slightly transparent surface */
-    --color-surface-alt: rgba(255, 255, 255, 0.7);
-    --color-text: #2c3e50; /* Dark Slate Blue */
-    --color-text-light: #7f8c8d;
-    --color-text-placeholder: #a0aec0; /* Lighter placeholder */
+    --color-accent: #ff8a73; /* Coral/Orange accent */
+    --color-accent-dark: #e86a54;
+
+    --color-success: #2ecc71; /* Green for completed */
+    --color-danger: #e74c3c; /* Red */
+
+    --color-text: #3a3f5c; /* Dark muted blue */
+    --color-text-light: #7a819f;
+    --color-text-placeholder: #a0a8c0;
     --color-text-on-primary: #ffffff;
-    --color-completed: #a5b1c2; /* Grey for completed */
-    --color-border: rgba(0, 0, 0, 0.08);
-    --color-shadow: rgba(44, 62, 80, 0.15);
-    --color-icon: #8a97a8;
 
-    --color-danger: #e74c3c;
-    --color-danger-dark: #c0392b;
-    --color-warning: #f39c12;
-    --color-warning-dark: #d35400;
+    --color-border: #d8dde9;
+    --color-shadow-light: #ffffff; /* Light source for neumorphism */
+    --color-shadow-dark: #c3cbe0; /* Dark shadow for neumorphism */
+    --color-icon: #9ba5c2;
 
+    --shadow-neumorphic-outset: 6px 6px 12px var(--color-shadow-dark), -6px -6px 12px var(--color-shadow-light);
+    --shadow-neumorphic-inset: inset 4px 4px 8px var(--color-shadow-dark), inset -4px -4px 8px var(--color-shadow-light);
+    --shadow-soft: 0 5px 15px rgba(58, 63, 92, 0.1); /* Softer traditional shadow */
 
-    --shadow-md: 0 6px 15px var(--color-shadow);
-    --shadow-lg: 0 10px 30px rgba(44, 62, 80, 0.2);
-    --border-radius-lg: 15px;
-    --border-radius-md: 10px;
+    --border-radius-lg: 20px; /* More rounded */
+    --border-radius-md: 12px;
+    --border-radius-sm: 8px;
     --transition-speed: 0.25s;
 }
 
@@ -49,9 +51,7 @@ html {
 
 body.app-background {
     font-family: var(--font-secondary);
-    background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end), var(--color-secondary));
-    background-size: 200% 200%; /* For potential animation */
-    animation: backgroundShift 15s ease infinite; /* Subtle background movement */
+    background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
     color: var(--color-text);
     line-height: 1.6;
     padding: 2rem 1rem;
@@ -61,71 +61,68 @@ body.app-background {
     min-height: 100vh;
 }
 
-/* Background Animation */
-@keyframes backgroundShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-
 .container {
     background-color: var(--color-surface);
-    backdrop-filter: blur(10px); /* Glassmorphism effect */
-    -webkit-backdrop-filter: blur(10px);
-    padding: 2rem 2.5rem 2.5rem; /* Adjusted padding */
+    padding: 2.5rem 3rem; /* Generous padding */
     border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-neumorphic-outset); /* Neumorphic shadow */
     width: 100%;
-    max-width: 700px; /* Wider */
+    max-width: 750px; /* Wider container */
     margin-top: 3rem;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for glass effect */
+    transition: box-shadow var(--transition-speed) ease; /* Smooth shadow transition */
 }
+/* Add a subtle hover effect to the container */
+/* .container:hover {
+    box-shadow: 8px 8px 16px var(--color-shadow-dark), -8px -8px 16px var(--color-shadow-light);
+} */
 
 .app-header {
     text-align: center;
-    margin-bottom: 2.5rem; /* More space after header */
+    margin-bottom: 2.5rem;
 }
 
 h1 {
     font-family: var(--font-primary);
-    font-weight: 800; /* Extra Bold */
-    color: transparent; /* Make text transparent */
-    background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary-dark));
-    background-clip: text;
-    -webkit-background-clip: text;
-    font-size: 2.8rem; /* Larger */
-    letter-spacing: -1px; /* Slightly tighter */
+    font-weight: 800;
+    color: var(--color-primary); /* Solid primary color for title */
+    font-size: 2.6rem;
+    display: inline-flex; /* Align icon nicely */
+    align-items: center;
+    gap: 0.7rem;
+}
+h1 i {
+    font-size: 0.8em; /* Make icon slightly smaller */
+    color: var(--color-success); /* Green checkmark */
 }
 
 /* --- Input Area --- */
 .input-area {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-    background-color: var(--color-surface-alt);
-    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem; /* More space */
+    background-color: var(--color-surface); /* Match container */
+    padding: 0.5rem; /* Padding around the elements */
     border-radius: var(--border-radius-md);
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-    position: relative; /* For icon positioning */
+    box-shadow: var(--shadow-neumorphic-inset); /* Inset effect */
 }
 
 .input-icon {
     color: var(--color-icon);
     font-size: 1.1rem;
-    margin-right: 0.5rem;
+    margin-left: 0.75rem; /* Space icon from edge */
+    flex-shrink: 0;
 }
 
 #taskInput {
     flex-grow: 1;
-    padding: 0.75rem 0.5rem; /* Adjusted padding */
-    border: none; /* Remove default border */
-    background-color: transparent; /* Inherit background */
-    font-size: 1.05rem;
+    padding: 0.8rem 0.5rem;
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
     font-family: var(--font-secondary);
     color: var(--color-text);
-    font-weight: 600;
+    font-weight: 500; /* Medium weight input */
 }
 #taskInput::placeholder {
     color: var(--color-text-placeholder);
@@ -141,31 +138,31 @@ button {
     cursor: pointer;
     border: none;
     border-radius: var(--border-radius-md);
-    padding: 0.75rem 1.3rem;
+    padding: 0.8rem 1.5rem; /* Slightly more padding */
     font-family: var(--font-primary);
-    font-weight: 700; /* Bolder buttons */
-    font-size: 0.95rem;
+    font-weight: 600; /* Bold buttons */
+    font-size: 0.9rem;
     transition: all var(--transition-speed) ease;
     display: inline-flex;
     align-items: center;
-    justify-content: center; /* Center content */
+    justify-content: center;
     gap: 0.6rem;
     white-space: nowrap;
-    text-transform: uppercase; /* Uppercase buttons */
-    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-soft); /* Soft shadow on buttons */
+    letter-spacing: 0.3px;
 }
 button:active {
-    transform: scale(0.97); /* More noticeable press effect */
+    transform: scale(0.96);
+    box-shadow: none; /* Flatten on press */
 }
 
 #addTaskBtn {
-    background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary-dark));
+    background-color: var(--color-primary);
     color: var(--color-text-on-primary);
-    box-shadow: 0 4px 10px rgba(127, 127, 213, 0.4); /* Colored shadow */
 }
 #addTaskBtn:hover {
-    box-shadow: 0 6px 15px rgba(127, 127, 213, 0.6);
-    filter: brightness(1.1); /* Brighter on hover */
+    background-color: var(--color-primary-dark);
+    box-shadow: 0 8px 20px rgba(106, 130, 251, 0.3); /* Stronger hover shadow */
 }
 #addTaskBtn i {
     font-size: 1em;
@@ -175,35 +172,41 @@ button:active {
 .task-area {
     margin-top: 2rem;
     border-top: 1px solid var(--color-border);
-    padding-top: 1.5rem;
+    padding-top: 2rem;
 }
 
 .controls {
     display: flex;
-    justify-content: space-between; /* Space out count and button */
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    padding: 0 0.5rem; /* Align with list padding */
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-    font-weight: 600;
+    margin-bottom: 1.8rem;
+    padding: 0 0.2rem;
 }
 
-#taskCount {
+.task-count-badge {
     font-family: var(--font-primary);
+    font-weight: 600;
+    background-color: var(--color-primary-light-transparent); /* Light primary bg */
+    color: var(--color-primary-dark);
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.85rem;
 }
 
 .clear-btn {
-    background: linear-gradient(90deg, var(--color-gradient-secondary-start), var(--color-gradient-secondary-end));
+    background-color: var(--color-accent);
     color: var(--color-text-on-primary);
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     font-size: 0.8rem;
-    font-weight: 700;
-    box-shadow: 0 3px 8px rgba(255, 154, 158, 0.4);
+    font-weight: 600;
 }
 .clear-btn:hover {
-    box-shadow: 0 5px 12px rgba(255, 154, 158, 0.6);
-    filter: brightness(1.1);
+    background-color: var(--color-accent-dark);
+    box-shadow: 0 6px 15px rgba(255, 138, 115, 0.3);
+}
+.clear-btn i {
+    font-size: 0.9em;
+    margin-right: -0.2rem; /* Pull icon slightly closer */
 }
 
 /* --- Task List --- */
@@ -211,60 +214,49 @@ button:active {
     list-style: none;
     padding: 0;
     margin: 0;
-    min-height: 100px; /* Give space for empty message */
-    position: relative; /* For empty message positioning */
+    min-height: 120px; /* Taller empty space */
+    position: relative;
 }
 
 /* Empty State Message */
 #taskList:empty::before {
-    content: "No tasks yet! Add one above.";
+    content: "Woohoo! No pending tasks. 🎉"; /* More engaging message */
     position: absolute;
-    top: 30px;
+    top: 40px; /* Lowered message */
     left: 50%;
+    width: 90%; /* Allow wrapping */
     transform: translateX(-50%);
+    text-align: center;
     color: var(--color-text-light);
-    font-style: italic;
-    font-size: 1rem;
+    font-style: normal; /* Not italic */
+    font-weight: 500;
+    font-size: 1.1rem; /* Larger message */
 }
 
-
 #taskList li {
-    background-color: rgba(255, 255, 255, 0.8); /* Slightly more transparent items */
-    padding: 1rem 1.2rem;
+    background-color: var(--color-surface);
+    padding: 1rem 1.3rem; /* More list item padding */
     margin-bottom: 1rem;
     border-radius: var(--border-radius-md);
-    border: 1px solid var(--color-border);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid transparent; /* Transparent border initially */
+    box-shadow: var(--shadow-soft);
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all var(--transition-speed) ease;
     word-break: break-word;
     position: relative;
-    overflow: hidden; /* For pseudo-elements */
+    overflow: visible; /* Allow potential button pop-out */
 }
 
-/* Subtle animated border effect on hover */
-#taskList li::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: -100%; /* Start off-screen */
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary-dark));
-    transition: left var(--transition-speed) ease-out;
+/* Accent border on hover/focus */
+#taskList li:hover,
+#taskList li.editing { /* Also show accent when editing */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(58, 63, 92, 0.15);
+    border-left: 4px solid var(--color-primary); /* Accent border */
+    padding-left: calc(1.3rem - 4px); /* Adjust padding to keep text aligned */
 }
-
-#taskList li:hover {
-    transform: translateY(-2px); /* Slight lift */
-    box-shadow: 0 5px 10px rgba(0,0,0,0.08);
-    border-color: rgba(134, 168, 231, 0.5); /* primary dark translucent */
-}
-#taskList li:hover::after {
-     left: 0; /* Slide in on hover */
-}
-
 
 /* Task Text & Editing */
 #taskList li .task-text {
@@ -272,80 +264,95 @@ button:active {
     margin-right: 1rem;
     cursor: pointer;
     position: relative;
-    transition: color var(--transition-speed) ease;
+    transition: color var(--transition-speed) ease, text-decoration var(--transition-speed) ease;
     font-size: 1rem;
-    font-weight: 600; /* Semi-bold tasks */
+    font-weight: 500;
     color: var(--color-text);
 }
 
 #taskList li .edit-input {
     flex-grow: 1;
     margin-right: 1rem;
-    padding: 0.4rem 0.6rem;
-    border: 1px solid var(--color-primary-dark);
-    border-radius: calc(var(--border-radius-md) / 1.5);
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
     font-size: 1rem;
     font-family: inherit;
-    font-weight: 600;
-    background-color: #fff;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    font-weight: 500;
+    background-color: #fff; /* White background for input */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
 }
 #taskList li .edit-input:focus {
     outline: none;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05), 0 0 0 2px rgba(134, 168, 231, 0.3);
+    border-color: var(--color-primary);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06), 0 0 0 3px var(--color-primary-light-transparent); /* Focus ring */
 }
 
 /* Completed Task Style */
 #taskList li.completed {
-    background-color: rgba(245, 247, 250, 0.8); /* Faded background */
-    opacity: 0.7; /* Fade out completed */
+    background-color: var(--color-surface-inset); /* Slightly darker bg */
+    box-shadow: var(--shadow-soft); /* Keep shadow */
+    opacity: 0.8;
 }
 #taskList li.completed .task-text {
-    color: var(--color-completed);
+    color: var(--color-text-light); /* Lighter text */
     text-decoration: line-through;
+    text-decoration-color: var(--color-success); /* Green strikethrough */
     text-decoration-thickness: 2px;
-    font-weight: 400; /* Lighter weight when completed */
 }
-/* No checkmark needed if opacity handles it well */
-
+/* Add checkmark icon for completed */
+#taskList li.completed .task-text::before {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--color-success);
+    margin-right: 0.75rem;
+    font-size: 0.9em;
+}
 
 /* Task Buttons */
 #taskList li .task-buttons {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.6rem; /* Wider gap */
     flex-shrink: 0;
-    opacity: 0; /* Hide buttons initially */
-    transition: opacity var(--transition-speed) ease;
+    opacity: 0; /* Hidden initially */
+    transform: translateX(10px); /* Start slightly off */
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
 }
 #taskList li:hover .task-buttons {
-    opacity: 1; /* Show buttons on list item hover */
+    opacity: 1;
+    transform: translateX(0); /* Slide in */
 }
 
 #taskList li button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.3rem;
-    font-size: 1rem;
+    background-color: var(--color-surface); /* Button bg matches item bg */
+    border: 1px solid var(--color-border);
     color: var(--color-icon);
-    transition: all var(--transition-speed) ease;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0.3rem;
+    font-size: 0.9rem; /* Slightly smaller icons */
+    border-radius: var(--border-radius-sm); /* Match other small radius */
+    width: 34px; /* Fixed size */
+    height: 34px;
+    box-shadow: var(--shadow-soft);
 }
 #taskList li button:hover {
-    background-color: rgba(0,0,0, 0.08); /* Darker hover background */
-    transform: scale(1.1); /* Pop effect */
+    background-color: #fff; /* Brighter background */
+    border-color: var(--color-text-light);
+    color: var(--color-text); /* Darker icon */
+    transform: scale(1.05); /* Scale up */
+}
+#taskList li button:active {
+    transform: scale(0.95);
+    box-shadow: none;
 }
 
 #taskList li .edit-btn:hover {
-    color: var(--color-primary-dark); /* Blue */
+    color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 #taskList li .delete-btn:hover {
-    color: var(--color-danger); /* Red */
+    color: var(--color-danger);
+    border-color: var(--color-danger);
 }
 
 /* Editing State Visibility */
@@ -353,52 +360,29 @@ button:active {
     display: none;
 }
 .editing .task-buttons {
-    opacity: 0; /* Hide buttons while editing */
-    pointer-events: none; /* Prevent interaction */
+    opacity: 0 !important; /* Ensure hidden when editing */
+    transform: translateX(10px) !important;
+    pointer-events: none;
 }
 .editing .edit-input {
     display: inline-block;
 }
 
 /* --- Media Query for Smaller Screens --- */
-@media (max-width: 650px) {
-    body.app-background {
-        padding: 1rem 0.5rem;
-        align-items: flex-start; /* Align top on mobile */
-    }
-    .container {
-        padding: 1.5rem 1.2rem 2rem;
-        margin-top: 1rem;
-        max-width: 95%; /* Allow more width */
-        backdrop-filter: blur(5px); /* Less blur on mobile */
-        -webkit-backdrop-filter: blur(5px);
-    }
-    h1 {
-        font-size: 2.2rem;
-        margin-bottom: 2rem;
-    }
-    .input-area {
-        padding: 0.4rem 0.4rem 0.4rem 0.8rem;
-        gap: 0.3rem;
-    }
-    .input-icon {
-        font-size: 1rem;
-        margin-right: 0.3rem;
-    }
-    #taskInput {
-        font-size: 1rem;
-        padding: 0.6rem 0.3rem;
-    }
-    #addTaskBtn {
-        padding: 0.7rem 1rem;
-        font-size: 0.9rem;
-    }
-    .task-area { margin-top: 1.5rem; padding-top: 1rem; }
-    .controls { margin-bottom: 1rem; padding: 0; }
-    #taskList li { padding: 0.8rem 1rem; }
-    #taskList li .task-text { font-size: 0.95rem; }
-    #taskList li .edit-input { font-size: 0.95rem; }
-    #taskList li .task-buttons { opacity: 1; /* Always show buttons on mobile */ }
-    #taskList li button { width: 30px; height: 30px; font-size: 0.9rem; }
-    #taskList:empty::before { top: 20px; font-size: 0.9rem; }
+@media (max-width: 700px) {
+    body.app-background { padding: 1rem 0.5rem; }
+    .container { padding: 2rem 1.5rem; margin-top: 1.5rem; max-width: 95%; box-shadow: var(--shadow-soft); /* Simpler shadow on mobile */ }
+    h1 { font-size: 2.2rem; }
+    .input-area { flex-direction: column; gap: 0.8rem; padding: 0.8rem; box-shadow: var(--shadow-soft); /* No inset on mobile */ }
+    .input-icon { display: none; /* Hide icon inside input area */ }
+    #taskInput { text-align: center; }
+    #addTaskBtn { width: 100%; padding: 0.9rem; } /* Taller button */
+    .task-area { margin-top: 1.5rem; padding-top: 1.5rem; }
+    .controls { flex-direction: column; gap: 0.8rem; align-items: stretch; margin-bottom: 1.5rem; }
+    .task-count-badge { text-align: center; }
+    .clear-btn { width: 100%; text-align: center; padding: 0.8rem; }
+    #taskList li { padding: 0.9rem 1rem; }
+    #taskList li:hover { transform: none; box-shadow: var(--shadow-soft); border-left: none; padding-left: 1rem; } /* Disable hover lift/border */
+    #taskList li .task-buttons { opacity: 1; transform: none; /* Always show buttons */ }
+    #taskList:empty::before { top: 30px; font-size: 1rem; }
 }
