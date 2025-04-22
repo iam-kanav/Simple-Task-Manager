@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Task Manager</title>
+    <title>Stylish Task Manager</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +19,7 @@
         <h1>My Tasks</h1>
 
         <div class="input-area">
-            <input type="text" id="taskInput" placeholder="Enter a new task...">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
             <button id="addTaskBtn" title="Add Task"><i class="fa-solid fa-plus"></i> Add</button>
         </div>
 
@@ -22,6 +28,7 @@
         </div>
 
         <ul id="taskList">
+            <!-- Tasks dynamically generated here -->
         </ul>
     </div>
 
