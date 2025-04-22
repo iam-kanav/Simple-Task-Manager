@@ -1,99 +1,147 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
+/* --- Global Styles & Variables --- */
+:root {
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Nunito Sans', sans-serif;
+
+    --color-bg: #f4f7f6;
+    --color-surface: #ffffff;
+    --color-primary: #3498db; /* A nice blue */
+    --color-primary-dark: #2980b9;
+    --color-secondary: #1abc9c; /* Teal for Add */
+    --color-secondary-dark: #16a085;
+    --color-accent: #f39c12; /* Orange for Clear */
+    --color-accent-dark: #e67e22;
+    --color-danger: #e74c3c; /* Red for Delete */
+    --color-danger-dark: #c0392b;
+    --color-text: #34495e;
+    --color-text-light: #7f8c8d;
+    --color-text-completed: #bdc3c7;
+    --color-border: #ecf0f1;
+    --color-icon: #95a5a6;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition-speed: 0.2s;
+}
+
+* {
+    box-sizing: border-box;
     margin: 0;
-    padding: 15px; /* Reduced padding for smaller screens initially */
+    padding: 0;
+}
+
+html {
+    font-size: 100%; /* 16px base */
+}
+
+body {
+    font-family: var(--font-secondary);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    padding: 2rem 1rem; /* More padding on body */
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    box-sizing: border-box;
 }
 
 .container {
-    background-color: #ffffff;
-    padding: 20px 25px; /* Adjusted padding */
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-surface);
+    padding: 2.5rem; /* Generous padding */
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
     width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-    box-sizing: border-box;
+    max-width: 650px; /* Slightly wider */
+    margin-top: 2rem;
 }
 
 h1 {
+    font-family: var(--font-primary);
+    font-weight: 700; /* Bolder */
     text-align: center;
-    color: #333;
-    margin-top: 0;
-    margin-bottom: 25px;
-    font-weight: 600;
-    font-size: 1.8rem; /* Slightly smaller H1 */
+    color: var(--color-text);
+    margin-bottom: 2rem;
+    font-size: 2.25rem; /* Larger heading */
 }
 
+/* --- Input Area --- */
 .input-area {
     display: flex;
-    gap: 8px; /* Slightly reduced gap */
-    margin-bottom: 20px;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
 }
 
 #taskInput {
     flex-grow: 1;
-    padding: 10px 12px; /* Adjusted padding */
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
     font-size: 1rem;
-    transition: border-color 0.2s ease;
-    min-width: 0; /* Prevent overflow issues in flex */
+    font-family: var(--font-secondary);
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    background-color: #fdfdfd; /* Slightly off-white input */
+}
+#taskInput::placeholder {
+    color: var(--color-text-light);
+    opacity: 0.8;
 }
 #taskInput:focus {
     outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* Focus ring */
+}
+
+/* --- Buttons --- */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1.2rem;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background-color var(--transition-speed) ease, transform 0.1s ease;
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    gap: 0.5rem; /* Space between icon and text */
+    white-space: nowrap;
+}
+button:active {
+    transform: translateY(1px); /* Subtle press effect */
 }
 
 #addTaskBtn {
-    padding: 10px 12px; /* Adjusted padding */
-    background-color: #28a745;
+    background-color: var(--color-secondary);
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.95rem; /* Slightly smaller font */
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    white-space: nowrap; /* Prevent text wrapping */
 }
 #addTaskBtn:hover {
-    background-color: #218838;
+    background-color: var(--color-secondary-dark);
 }
 #addTaskBtn i {
-    font-size: 0.9em;
+    font-size: 1em; /* Match button font size */
 }
 
 .controls {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border); /* Separator */
 }
 
 .clear-btn {
-    padding: 8px 12px; /* Adjusted padding */
-    background-color: #ffc107;
-    color: #333;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.85rem; /* Smaller font */
-    font-weight: 500;
-    transition: background-color 0.2s ease;
+    background-color: var(--color-accent);
+    color: white;
+    padding: 0.5rem 1rem; /* Slightly smaller */
+    font-size: 0.85rem;
 }
 .clear-btn:hover {
-    background-color: #e0a800;
+    background-color: var(--color-accent-dark);
 }
 
+/* --- Task List --- */
 #taskList {
     list-style: none;
     padding: 0;
@@ -101,61 +149,75 @@ h1 {
 }
 
 #taskList li {
-    background-color: #f8f9fa;
-    padding: 10px 12px; /* Adjusted padding */
-    margin-bottom: 8px; /* Reduced margin */
-    border-radius: 5px;
-    border: 1px solid #eee;
+    background-color: var(--color-surface);
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 0.75rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.2s ease;
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     word-break: break-word;
 }
-
+#taskList li:last-child {
+    margin-bottom: 0;
+}
 #taskList li:hover {
-    background-color: #f1f1f1;
+    background-color: #f9fafb; /* Very subtle hover */
+    border-color: #e1e5e8;
 }
 
+/* Task Text & Editing */
 #taskList li .task-text {
     flex-grow: 1;
-    margin-right: 10px; /* Reduced margin */
+    margin-right: 1rem;
     cursor: pointer;
     position: relative;
-    transition: color 0.3s ease;
-    font-size: 0.95rem; /* Slightly smaller text */
+    transition: color var(--transition-speed) ease;
+    font-size: 1rem;
+    font-weight: 400; /* Regular weight for tasks */
 }
 
 #taskList li .edit-input {
     flex-grow: 1;
-    margin-right: 10px;
-    padding: 5px 8px;
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    font-size: 0.95rem; /* Match task text */
+    margin-right: 1rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--color-primary);
+    border-radius: calc(var(--border-radius) / 2); /* Smaller radius */
+    font-size: 1rem;
     font-family: inherit;
+    background-color: #fdfdfd;
 }
 #taskList li .edit-input:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
+/* Completed Task Style */
+#taskList li.completed {
+    background-color: #f8f9fa; /* Slightly different background */
+    border-color: #e9ecef;
+}
 #taskList li.completed .task-text {
+    color: var(--color-text-completed);
     text-decoration: line-through;
-    color: #888;
+    font-weight: 400; /* Keep weight consistent */
 }
 #taskList li.completed .task-text::before {
-    content: '\f00c';
+    content: '\f00c'; /* Font Awesome check */
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
-    color: #28a745;
-    margin-right: 8px;
-    font-size: 0.9em; /* Scale checkmark */
+    color: var(--color-secondary); /* Use Add button color for consistency */
+    margin-right: 0.75rem;
+    font-size: 0.9em;
 }
 
+/* Task Buttons */
 #taskList li .task-buttons {
     display: flex;
-    gap: 5px; /* Reduced gap */
+    gap: 0.5rem; /* Slightly tighter gap */
     flex-shrink: 0;
 }
 
@@ -163,22 +225,29 @@ h1 {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 5px;
-    font-size: 1rem; /* Slightly smaller icons */
-    color: #6c757d;
-    transition: color 0.2s ease;
+    padding: 0.3rem; /* Padding around icon */
+    font-size: 1rem; /* Icon size */
+    color: var(--color-icon);
+    transition: color var(--transition-speed) ease;
+    border-radius: 50%; /* Circular hover effect area */
+    width: 32px; /* Fixed width for alignment */
+    height: 32px; /* Fixed height for alignment */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #taskList li button:hover {
-    color: #343a40;
+    background-color: rgba(0,0,0, 0.05); /* Subtle background on hover */
 }
 
 #taskList li .edit-btn:hover {
-    color: #007bff;
+    color: var(--color-primary); /* Blue */
 }
 #taskList li .delete-btn:hover {
-    color: #dc3545;
+    color: var(--color-danger); /* Red */
 }
 
+/* Editing State Visibility */
 .editing .task-text,
 .editing .task-buttons {
     display: none;
@@ -187,52 +256,46 @@ h1 {
     display: inline-block;
 }
 
-/* Media Query for larger screens */
-@media (min-width: 600px) {
-     body {
-        padding: 30px; /* Restore larger padding */
+/* --- Media Query for Smaller Screens --- */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem 0.5rem; /* Less padding */
     }
-     .container {
-        padding: 30px 40px; /* Restore larger padding */
-        margin-top: 30px;
+    .container {
+        padding: 1.5rem 1rem; /* Less padding */
+        margin-top: 1rem;
     }
-     h1 {
-        font-size: 2rem; /* Restore larger H1 */
-        margin-bottom: 30px;
+    h1 {
+        font-size: 1.8rem; /* Smaller H1 */
+        margin-bottom: 1.5rem;
     }
     .input-area {
-        gap: 10px; /* Restore gap */
+        flex-direction: column; /* Stack input and button */
+        gap: 0.5rem;
     }
-     #taskInput {
-        padding: 12px 15px; /* Restore padding */
+    #addTaskBtn {
+        width: 100%; /* Full width button */
+        justify-content: center; /* Center icon/text */
     }
-     #addTaskBtn {
-        padding: 12px 15px; /* Restore padding */
-        font-size: 1rem; /* Restore font size */
+    #taskList li {
+        padding: 0.7rem 0.9rem;
     }
-     .clear-btn {
-        padding: 8px 15px; /* Restore padding */
-        font-size: 0.9rem; /* Restore font size */
+    #taskList li .task-text {
+        font-size: 0.95rem;
     }
-     #taskList li {
-        padding: 12px 15px; /* Restore padding */
-        margin-bottom: 10px; /* Restore margin */
+    #taskList li .edit-input {
+        font-size: 0.95rem;
     }
-     #taskList li .task-text {
-        margin-right: 15px; /* Restore margin */
-        font-size: 1rem; /* Restore font size */
-    }
-     #taskList li .edit-input {
-        font-size: 1rem; /* Restore font size */
-        margin-right: 15px;
-    }
-     #taskList li .task-buttons {
-        gap: 8px; /* Restore gap */
-    }
-     #taskList li button {
-        font-size: 1.1rem; /* Restore icon size */
+    #taskList li button {
+        width: 28px; /* Slightly smaller touch target */
+        height: 28px;
+        font-size: 0.9rem;
     }
      #taskList li.completed .task-text::before {
-        font-size: 1em; /* Restore checkmark size */
+         margin-right: 0.5rem;
      }
+    .controls {
+        padding-bottom: 0.75rem;
+        margin-bottom: 1rem;
+    }
 }
